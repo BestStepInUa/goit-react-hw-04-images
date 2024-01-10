@@ -64,7 +64,7 @@ const App = () => {
       }
     };
 
-    fetchImages();
+    if (query !== '') fetchImages();
   }, [query, page]);
 
   const handleSearchbarSubmit = newQuery => {
@@ -98,7 +98,12 @@ const App = () => {
       <Searchbar onSubmit={handleSearchbarSubmit} />
       {loader && <Loader />}
       {hits.length > 0 && (
-        <ImageGallery hits={hits} onHitClick={handleHitClick} />
+        <ImageGallery
+          hits={hits}
+          onHitClick={
+            (handleHitClick, () => console.log('selectedHit: ', selectedHit))
+          }
+        />
       )}
       {isShowModal && (
         <Modal selectedHit={selectedHit} hideModal={toggleModal} />
