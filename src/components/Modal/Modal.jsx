@@ -1,30 +1,29 @@
-import { Component } from "react";
+import { useEffect } from 'react';
 
-export default class Modal extends Component {
-    handleEscClick = evt => {
-        if (evt.code === 'Escape') {
-            this.props.hideModal()
-        }
-    }
+const Modal = ({ hideModal, selectedHit }) => {
+  useEffect(() => {
+    const handleEscClick = evt => {
+      if (evt.code === 'Escape') {
+        hideModal();
+      }
+    };
 
-    componentDidMount() {
-		document.addEventListener('keydown', this.handleEscClick)
-	}
+    document.addEventListener('keydown', handleEscClick);
 
-	componentWillUnmount() {
-		document.removeEventListener('keydown', this.handleEscClick)
-    }
-    
-    render() {    
-        const {largeImageURL, tags} = this.props.selectedHit;
-                
-        return (
-            <div className="Overlay">
-                <div className="Modal">
-                    <img src={largeImageURL} alt={tags} />
-                </div>
-            </div>
-        )
-    }
+    return () => {
+      document.removeEventListener('keydown', handleEscClick);
+    };
+  }, [hideModal]);
 
-}
+  const { largeImageURL, tags } = selectedHit;
+
+  return (
+    <div className="Overlay">
+      <div className="Modal">
+        <img src={largeImageURL} alt={tags} />
+      </div>
+    </div>
+  );
+};
+
+export default Modal;

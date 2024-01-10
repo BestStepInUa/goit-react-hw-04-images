@@ -85,7 +85,6 @@ const App = () => {
 
   const handleHitClick = ({ largeImageURL, tags }) => {
     setSelectedHit({ largeImageURL, tags });
-    // console.log('selectedHit: ', selectedHit)
     toggleModal();
   };
 
