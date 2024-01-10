@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio.js';
 
 import fetchImgs from 'components/helpers/API';
@@ -27,14 +27,9 @@ const App = () => {
 
   const firstUpdate = useRef(true);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
-      return;
-    }
-
-    if (query === '' && !firstUpdate) {
-      Notify.warning('Error! You must specify a keyword to search for.');
       return;
     }
 
