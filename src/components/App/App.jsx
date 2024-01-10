@@ -98,12 +98,7 @@ const App = () => {
       <Searchbar onSubmit={handleSearchbarSubmit} />
       {loader && <Loader />}
       {hits.length > 0 && (
-        <ImageGallery
-          hits={hits}
-          onHitClick={
-            (handleHitClick, () => console.log('selectedHit: ', selectedHit))
-          }
-        />
+        <ImageGallery hits={hits} onHitClick={handleHitClick} />
       )}
       {isShowModal && (
         <Modal selectedHit={selectedHit} hideModal={toggleModal} />
